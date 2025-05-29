@@ -28,6 +28,8 @@ db_allocated_storage   = 20
 db_engine              = "postgres"
 db_engine_version      = "17" # Example: check available versions for db.t3.micro in ap-south-1
 db_port                = 5432
+db_multi_az            = "false"
+db_skip_final_snapshot = "true"
 
 rds_custom_tags = {
   Owner       = "DevTeam"
@@ -36,6 +38,13 @@ rds_custom_tags = {
 }
 
 container_port = 80 // Note: container_image_tag is passed by workflow
+
+// Values for the ECS module that were previously defaulted
+// These are passed from the root module to the ecs module, so they are defined here as root variables.
+ecs_task_cpu           = 256
+ecs_task_memory        = 512
+ecs_desired_task_count = 1
+ecs_assign_public_ip   = false // Since we are using an ALB
 
 enable_waf = true
 
